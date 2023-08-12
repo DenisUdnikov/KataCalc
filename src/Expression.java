@@ -28,6 +28,8 @@ public class Expression {
             a = romanToArabic(inputSplit[0]);
             b = romanToArabic(inputSplit[2]);
         }
+        if (a > 10 || b > 100 || a < 1 || b < 1)
+            throw new Exception("Введённое число больше 10 или меньше 1.");
         oper = recognitionOperation(inputSplit[1]);
     }
     public String getResult() throws Exception {
@@ -48,9 +50,13 @@ public class Expression {
             default:
                 throw new Exception("Во время вычисления что-то пошло не так.");
         }
+        if (result < 0)
+            throw new Exception("Результат меньше 0.");
         if (isArabic) {
             return result.toString();
         } else {
+            if (result < 1)
+                throw  new Exception("При использовании римских чисел результат не может быть меньше 1.");
             return arabicToRoman(result);
         }
     }
